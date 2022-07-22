@@ -8,6 +8,8 @@
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <!-- Styles -->
     <style>
@@ -64,42 +66,51 @@
     </style>
 </head>
 <body>
+@foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+    <li>
+        <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+            {{ $properties['native'] }}
+        </a>
+    </li>
+@endforeach
 <div class="flex-center position-ref full-height">
-    @if (Route::has('login'))
-        <div class="top-right links">
-            @auth
-                <a href="{{ url('/home') }}">Home</a>
-            @else
-                <a href="{{ route('login') }}">Login</a>
 
-                @if (Route::has('register'))
-                    <a href="{{ route('register') }}">Register</a>
-                @endif
-            @endauth
+    <br>
+    @if(Session::has('success'))
+        <div class="alert alert-success" role="alert">
+            {{Session::get('success')}}
         </div>
+    @else
+        <form method="POST" action="{{route('offers.store')}}">
+            @csrf
+            <div class="form-group">
+                <label for="exampleInputEmail1">Name</label>
+                <input type="text" class="form-control" name="name" placeholder="Enter name">
+                @error('name')
+                <small class="alert alert-warning" role="alert">{{$message}}</small>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">Price</label>
+                <input type="text" class="form-control" name="price" placeholder="Enter Price">
+                @error('price')
+                <small class="alert alert-warning" role="alert">{{$message}}</small>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">Details</label>
+                <input type="text" class="form-control" name="details" placeholder="Enter details">
+                @error('details')
+                <small class="alert alert-warning" role="alert">{{$message}}</small>
+                @enderror
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
     @endif
 
-    <div class="content">
-        <div class="title m-b-md">
-       @forelse($data as $_data)
-           <p>
-               {{$_data}}
-           </p>
-            @empty
-           <p>empty</p>
-        @endforelse
-        </div>
-        <div class="links">
-            <a href="">Docs</a>
-            <a href="https://laracasts.com">Laracasts</a>
-            <a href="https://laravel-news.com">News</a>
-            <a href="https://blog.laravel.com">Blog</a>
-            <a href="https://nova.laravel.com">Nova</a>
-            <a href="https://forge.laravel.com">Forge</a>
-            <a href="https://vapor.laravel.com">Vapor</a>
-            <a href="https://github.com/laravel/laravel">GitHub</a>
-        </div>
-    </div>
 </div>
+
 </body>
 </html>

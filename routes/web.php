@@ -14,11 +14,23 @@
 //Route::resource('test','test');
 
 
+//Auth::routes();
 
+//Route::get('/offer', 'OfferController@getOffer');
 
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']], function () {
 
-Auth::routes();
+    Route::group([
+        'prefix' => 'offers'], function () {
 
-Route::get('/home', 'HomeController@index')->name('home');
+        Route::get('/', function () {
+            return __('msg.hi1');
+        });
 
-
+        Route::get('create', 'OfferController@create');
+        Route::post('store', 'OfferController@store')->name('offers.store');
+    });
+});

@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'hi1' => 'Hi 1 in english',
-    'hi2' => 'Hi 2 in english',
+    'hi1' => 'مرحبا 1 بالعربي',
+    'hi2' => 'مرحبا 2 بالعربي',
 ];
