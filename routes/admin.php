@@ -8,16 +8,16 @@
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
-|
+|aaaaaaaaaaaaaaaaaaaaaaaaaaaa
 */
 
 
 /*
 هذا ملف الرويت ويتم وضع جميع روابط ال url الخاصه بالادمن
- *
+ *aaaaaaaaaaaaaaaaaaaaaaaaa
  */
 
-/*Route::group(['prefix' => 'admin'], function () {
+/*Route::group(['prefix' => 'admin2'], function () {
 
     Route::get('/' , 'Admin@index');
 

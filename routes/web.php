@@ -32,5 +32,7 @@ Route::group(
 
         Route::get('create', 'OfferController@create');
         Route::post('store', 'OfferController@store')->name('offers.store');
+
+        Route::get('all', 'OfferController@getAll');
     });
 });
